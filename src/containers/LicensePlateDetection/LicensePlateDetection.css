@@ -1,11 +1,12 @@
-.container{
+/* .container{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .wrapper{
-    width: 80%;
-    height: 50;
+  width: auto;
+  height: 40vh;
 }
 
 .container-inference {
@@ -36,4 +37,9 @@
   grid-row-end: 0;
   grid-column-start: 1;
   grid-column-start: 2;
+} */
+
+.canvas {
+  position: absolute;
+  z-index: 5;
 }

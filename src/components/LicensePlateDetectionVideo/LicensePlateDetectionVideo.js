@@ -5,6 +5,7 @@ import Canvas from "../Canvas/Canvas";
 import * as Constants from "../../constants";
 import axios from "axios";
 import "./LicensePlateDetectionVideo.css";
+import { Card, Stack } from "react-bootstrap";
 
 class LicensePlateDetectionVideo extends Component {
   // invoke as soon as the compoenents is mounted (inserted to the tree)
@@ -440,12 +441,17 @@ class LicensePlateDetectionVideo extends Component {
 
   render() {
     return (
-      <div className="video-container" id="video-container">
-        <h2 style={{ textAlign: "center" }}>Camera</h2>
-        <div className="license-plate-detection-container">
-          <Camera className={"camera"} videoRef={this.props.videoRef} />
-          <Canvas className={"canvas"} canvasRef={this.props.canvasAnnotRef} />
-        </div>
+      <div >
+          <Stack gap={2}>
+            <h2 style={{textAlign: "center"}}>Camera</h2>
+            <Card className="border-0">
+              <Camera className={"camera"} videoRef={this.props.videoRef} />
+              <Canvas
+                className={"canvas"}
+                canvasRef={this.props.canvasAnnotRef}
+              />
+            </Card>
+          </Stack>
       </div>
     );
   }

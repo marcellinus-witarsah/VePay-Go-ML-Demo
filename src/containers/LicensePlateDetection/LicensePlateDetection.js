@@ -2,13 +2,20 @@ import React from "react";
 import Canvas from "../../components/Canvas/Canvas";
 import InferenceResult from "../../components/InferenceResult/InferenceResult";
 import LicensePlateDetectionVideo from "../../components/LicensePlateDetectionVideo/LicensePlateDetectionVideo";
-import ToggleSwitchButton from "../../components/ToggleSwitchButton/ToggleSwitchButton";
 import LicensePlateDetectionImage from "../../components/LicensePlateDetectionImage/LicensePlateDetectionImage";
 import * as Constants from "../../constants";
 import * as tf from "@tensorflow/tfjs";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import "./LicensePlateDetection.css";
+import {
+  Card,
+  Container,
+  Row,
+  Col,
+  Spinner,
+  Badge,
+  Stack,
+  Form,
+} from "react-bootstrap";
 
 class LicensePlateDetection extends React.Component {
   constructor(props) {
@@ -106,76 +113,102 @@ class LicensePlateDetection extends React.Component {
     this.setState({
       typeDataInput: this.state.typeDataInput === "camera" ? "image" : "camera",
     });
+    console.log("masuk");
     this.reset();
   };
 
   render() {
     return (
-      <div className="container">
-        <div className="wrapper">
-          <div className="container__header">
+      <div>
+        <Container>
+          <Row style={{ textAlign: "center" }}>
             <h1>Live Camera Feed</h1>
-          </div>
-          <ToggleSwitchButton
-            label="Change Data Input"
-            changeTypeDataInput={this.changeTypeDataInput}
-          />
-          <div className="container-inference">
-            {this.state.model ? (
-              <div className="container-inference__input-data">
-                {this.state.typeDataInput === "camera" ? (
-                  <LicensePlateDetectionVideo
-                    // passin states
-                    parentState={this.state}
-                    // passing functions
-                    setIsDataReceived={this.setIsDataReceived}
-                    setCurrentImage={this.setCurrentImage}
-                    setNextObjectId={this.setNextObjectId}
-                    setObjects={this.setObjects}
-                    setDisappeared={this.setDisappeared}
-                    setCountSamePosition={this.setCountSamePosition}
-                    setInferenceResult={this.setInferenceResult}
-                    // passing refs
-                    videoRef={this.videoRef}
-                    canvasAnnotRef={this.canvasAnnotRef}
-                    canvasOutputRef={this.canvasOutputRef}
-                    prevObject={this.prevObject}
-                  />
-                ) : (
-                  <LicensePlateDetectionImage
-                    // passing functions
-                    setIsDataReceived={this.setIsDataReceived}
-                    setInferenceResult={this.setInferenceResult}
-                    parentState={this.state}
-                    canvasAnnotRef={this.canvasAnnotRef}
-                    canvasOutputRef={this.canvasOutputRef}
-                  />
-                )}
+          </Row>
+          <Row>
+            <Stack
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <h2>
+                  <Badge bg="secondary">Input Data</Badge>
+                </h2>
               </div>
-            ) : (
-              <Box
+              <div>
+                <Form.Check
+                  type="switch"
+                  label={this.state.typeDataInput}
+                  onClick={this.changeTypeDataInput}
+                />
+              </div>
+            </Stack>
+          </Row>
+          <Row>
+            <Col>
+              <Card
+                className="border-0"
                 style={{
                   display: "flex",
-                  alignItems: "center",
                   justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                <CircularProgress style={{ color: "#D3B016" }} />
-              </Box>
-            )}
-            <div className="container-inference__output">
-              <h2 style={{ textAlign: "center" }}>Information</h2>
-              <InferenceResult
-                inferenceResult={this.state.inferenceResult}
-                location={"Senayan City Mall"}
-                licensePlatePicture={
-                  <Canvas canvasRef={this.canvasOutputRef} />
-                }
-                isDataReceived={this.state.isDataReceived}
-              />
-            </div>
-          </div>
-        </div>
+                {this.state.model ? (
+                  <div>
+                    {this.state.typeDataInput === "camera" ? (
+                      <LicensePlateDetectionVideo
+                        // passin states
+                        parentState={this.state}
+                        // passing functions
+                        setIsDataReceived={this.setIsDataReceived}
+                        setCurrentImage={this.setCurrentImage}
+                        setNextObjectId={this.setNextObjectId}
+                        setObjects={this.setObjects}
+                        setDisappeared={this.setDisappeared}
+                        setCountSamePosition={this.setCountSamePosition}
+                        setInferenceResult={this.setInferenceResult}
+                        // passing refs
+                        videoRef={this.videoRef}
+                        canvasAnnotRef={this.canvasAnnotRef}
+                        canvasOutputRef={this.canvasOutputRef}
+                        prevObject={this.prevObject}
+                      />
+                    ) : (
+                      <LicensePlateDetectionImage
+                        // passing functions
+                        setIsDataReceived={this.setIsDataReceived}
+                        setInferenceResult={this.setInferenceResult}
+                        parentState={this.state}
+                        canvasAnnotRef={this.canvasAnnotRef}
+                        canvasOutputRef={this.canvasOutputRef}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <Spinner animation="border" variant="warning">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                )}
+              </Card>
+            </Col>
+            <Col>
+              <Card className="border-0">
+                <h2 style={{ textAlign: "center" }}>Information</h2>
+                <InferenceResult
+                  inferenceResult={this.state.inferenceResult}
+                  location={"Senayan City Mall"}
+                  licensePlatePicture={
+                    <Canvas canvasRef={this.canvasOutputRef} />
+                  }
+                  isDataReceived={this.state.isDataReceived}
+                />
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

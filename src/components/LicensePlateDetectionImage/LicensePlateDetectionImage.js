@@ -5,6 +5,7 @@ import * as Constants from "../../constants";
 import Canvas from "../Canvas/Canvas";
 import axios from "axios";
 import * as tf from "@tensorflow/tfjs";
+import { Card, Stack } from "react-bootstrap";
 
 class LicensePlateDetectionImage extends React.Component {
   // declare dictionary which represent the state of the website page
@@ -154,7 +155,7 @@ class LicensePlateDetectionImage extends React.Component {
         // update the inference result
         this.props.setInferenceResult(response.data["prediction"]);
         this.props.setIsDataReceived(true);
-      });    
+      });
   };
 
   drawBoundingBox = (item, ctx) => {
@@ -277,30 +278,30 @@ class LicensePlateDetectionImage extends React.Component {
 
   render() {
     return (
-      <div className="Dropzone-page">
-        <h2 style={{ textAlign: "center" }}>Image</h2>
-        {this.props.parentState.model ? (
-          <MagicDropzone
-            className="Dropzone"
-            accept="image/jpeg, image/png, .jpg, .jpeg, .png"
-            multiple={false}
-            onDrop={this.onDrop}
-          >
-            {this.state.preview ? (
-              <img
-                alt="upload preview"
-                onLoad={this.onImageChange}
-                className="Dropzone-img"
-                src={this.state.preview}
-              />
-            ) : (
-              "Choose or drop a file."
-            )}
-            <Canvas id={"canvas"} canvasRef={this.props.canvasAnnotRef} />
-          </MagicDropzone>
-        ) : (
-          <div className="Dropzone">Loading model...</div>
-        )}
+      <div>
+        <Stack gap={2}>
+          <h2 style={{ textAlign: "center" }}>Image</h2>
+          <Card className="border-0">
+            <MagicDropzone
+              className="Dropzone"
+              accept="image/jpeg, image/png, .jpg, .jpeg, .png"
+              multiple={false}
+              onDrop={this.onDrop}
+            >
+              {this.state.preview ? (
+                <img
+                  alt="upload preview"
+                  onLoad={this.onImageChange}
+                  className="Dropzone-img"
+                  src={this.state.preview}
+                />
+              ) : (
+                "Choose or drop a file."
+              )}
+              <Canvas id={"canvas"} canvasRef={this.props.canvasAnnotRef} />
+            </MagicDropzone>
+          </Card>
+        </Stack>
       </div>
     );
   }
