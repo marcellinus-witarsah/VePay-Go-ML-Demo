@@ -287,13 +287,6 @@ class LicensePlateDetectionVideo extends Component {
         // It's not bad practice to clean up and make sure we got everything
         console.log("Make sure we cleaned up", tf.memory().numTensors);
       });
-    // function hans
-    // function bintang
-
-
-    // send data to flask
-    // fetch
-
     const body = { "license-plate": data["regionOfInterestArr"] };
     const headers = {
       "Access-Control-Allow-Origin": "*",
@@ -308,16 +301,6 @@ class LicensePlateDetectionVideo extends Component {
         this.props.setInferenceResult(response.data["prediction"]);
         this.props.setIsDataReceived(true);
       });
-    
-    
-    // axios
-    //   .post("https://vepay-go.uc.r.appspot.com", body, {
-    //     headers: headers,
-    //   })
-    //   .then((response) => {
-    //     // update the inference result
-    //     this.props.setInferenceResult(response.data["prediction"]);
-    //   });
   };
 
   update = (valid_detections_data) => {

@@ -8,6 +8,7 @@ import * as Constants from "../../constants";
 import * as tf from "@tensorflow/tfjs";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import "./LicensePlateDetection.css";
 
 class LicensePlateDetection extends React.Component {
   constructor(props) {
@@ -110,18 +111,18 @@ class LicensePlateDetection extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <div className="liveheader">
+      <div className="container">
+        <div className="wrapper">
+          <div className="container__header">
             <h1>Live Camera Feed</h1>
           </div>
           <ToggleSwitchButton
             label="Change Data Input"
             changeTypeDataInput={this.changeTypeDataInput}
           />
-          <div className="video-wrapper">
+          <div className="container-inference">
             {this.state.model ? (
-              <div>
+              <div className="container-inference__input-data">
                 {this.state.typeDataInput === "camera" ? (
                   <LicensePlateDetectionVideo
                     // passin states
@@ -159,10 +160,10 @@ class LicensePlateDetection extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                <CircularProgress style={{color: "#D3B016"}}/>
+                <CircularProgress style={{ color: "#D3B016" }} />
               </Box>
             )}
-            <div className="inference-result">
+            <div className="container-inference__output">
               <h2 style={{ textAlign: "center" }}>Information</h2>
               <InferenceResult
                 inferenceResult={this.state.inferenceResult}

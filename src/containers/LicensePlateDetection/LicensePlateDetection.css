@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper{
+    width: 80%;
+    height: 50;
+}
+
+.container-inference {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+.container-inference__input-data {
+  width: 100%;
+  grid-row-start: 0;
+  grid-row-end: 0;
+  grid-column-start: 0;
+  grid-column-start: 1;
+}
+
+.container-inference__input-data {
+  width: 100%;
+  grid-row-start: 0;
+  grid-row-end: 0;
+  grid-column-start: 0;
+  grid-column-start: 1;
+}
+
+.container-inference__output {
+  width: 100%;
+  grid-row-start: 0;
+  grid-row-end: 0;
+  grid-column-start: 1;
+  grid-column-start: 2;
+}
