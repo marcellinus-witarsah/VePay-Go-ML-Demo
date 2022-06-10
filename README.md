@@ -20,7 +20,7 @@ Then you want to access or activate the environment using this command:
 The machine learning service will be run on Flask server and to run it, type this command to : 
 ```python main.py```
 
-Then see the address of the server. Next, copy and paste the link to ```PYTHON_SERVICE_URL``` constant inside src\constants.js
+Then see the address of the server. Next, copy and paste the link to ```PYTHON_SERVICE_URL``` constant inside **src\constants.js**
 
 ## Setting Up React.js Website
 Copy this folder into your local data or clone the GitHub repo by running command:
