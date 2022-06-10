@@ -5,7 +5,6 @@ import LicensePlateDetectionVideo from "../../components/LicensePlateDetectionVi
 import LicensePlateDetectionImage from "../../components/LicensePlateDetectionImage/LicensePlateDetectionImage";
 import * as Constants from "../../constants";
 import * as tf from "@tensorflow/tfjs";
-import "./LicensePlateDetection.css";
 import {
   Card,
   Container,

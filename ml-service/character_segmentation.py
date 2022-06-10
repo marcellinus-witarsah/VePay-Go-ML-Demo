@@ -124,7 +124,6 @@ def predict_characters(model, data):
         x = tf.convert_to_tensor(arr)
         x = tf.expand_dims(x, axis=0)
         classes = model.predict(x, batch_size=10)
-        print(classes)
         index = int(np.argmax(classes))
         characters += dictionary[index]
 
