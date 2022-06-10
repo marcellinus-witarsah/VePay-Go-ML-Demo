@@ -148,7 +148,7 @@ class LicensePlateDetectionImage extends React.Component {
       "Content-Type": "application/json",
     };
     axios
-      .post("https://vepay-go.uc.r.appspot.com", body, {
+      .post(Constants.PYTHON_SERVICE_URL, body, {
         headers: headers,
       })
       .then((response) => {

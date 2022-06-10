@@ -61,9 +61,18 @@ class LicensePlateDetection extends React.Component {
       inferenceResult: "",
     });
     this.videoRef = React.createRef();
-    this.canvasAnnotRef = React.createRef();
-    this.canvasOutputRef = React.createRef();
     this.prevObject = React.createRef();
+  };
+
+  // clear canvas
+  clearCanvas = () => {
+    let canvas = this.canvasAnnotRef.current;
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    canvas = this.canvasOutputRef.current;
+    ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   };
 
   // functions for updating states
@@ -113,8 +122,8 @@ class LicensePlateDetection extends React.Component {
     this.setState({
       typeDataInput: this.state.typeDataInput === "camera" ? "image" : "camera",
     });
-    console.log("masuk");
     this.reset();
+    this.clearCanvas();
   };
 
   render() {
@@ -188,7 +197,7 @@ class LicensePlateDetection extends React.Component {
                     )}
                   </div>
                 ) : (
-                  <Spinner animation="border" variant="warning">
+                  <Spinner animation="border" variant="secondary">
                     <span className="visually-hidden">Loading...</span>
                   </Spinner>
                 )}

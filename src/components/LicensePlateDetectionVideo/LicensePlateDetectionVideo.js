@@ -294,7 +294,7 @@ class LicensePlateDetectionVideo extends Component {
       "Content-Type": "application/json",
     };
     axios
-      .post("https://vepay-go.uc.r.appspot.com", body, {
+      .post("http://127.0.0.1:5000", body, {
         headers: headers,
       })
       .then((response) => {
